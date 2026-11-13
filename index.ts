@@ -51,6 +51,7 @@ import { isSearchinfinityAvailable } from "./searchinfinity.ts";
 import { isQueritAvailable } from "./querit.ts";
 import { isTavilyAvailable } from "./tavily.ts";
 import { isTabstackAvailable } from "./tabstack.ts";
+import { isGithubSearchAvailable } from "./github-search.ts";
 import { isYouAvailable } from "./you.ts";
 import { isFirecrawlAvailable } from "./firecrawl.ts";
 import { isJinaSearchAvailable } from "./jina-search.ts";
@@ -389,6 +390,7 @@ async function getProviderAvailability(ctx: ExtensionContext): Promise<ProviderA
 		autom: allowedProviders.has("autom") && isAutomAvailable(),
 		specstream: allowedProviders.has("specstream") && isSpecStreamAvailable(),
 		deepseek: allowedProviders.has("deepseek") && isDeepSeekAvailable(),
+		github: allowedProviders.has("github") && (await isGithubSearchAvailable()),
 	};
 	return {
 		all: ALL_SEARCH_PROVIDERS.some(provider => provider === "gemini" ? geminiApiAvail : providers[provider]),
